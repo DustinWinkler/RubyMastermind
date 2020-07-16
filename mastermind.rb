@@ -157,6 +157,8 @@ elsif game_type == 2
   end  
   if game.turns == 13
     puts "You did not guess the computer's code within 12 turns. You lose! :("
+    puts "The computer's code was #{computer.code}"
+    game.display_input(computer.code)
   end
 elsif game_type == 3
   puts "What is the codemaker's code?"
@@ -165,7 +167,7 @@ elsif game_type == 3
     puts "Invalid code, try again"
     code = gets.chomp
   end
-  codemaker = Player.new(code)
+  codemaker = Player.new(code) 
   codebreaker = Player.new('')
   game = Game.new
   while game.turns <= 12
@@ -175,6 +177,7 @@ elsif game_type == 3
       puts "Invalid code, try again"
       guess = gets.chomp
     end
+    game.display_input(guess)
     codebreaker.check_answer(guess, codemaker.code)
     if guess == codemaker.code
       puts "You guessed the codemaker's code! You win!"
@@ -186,3 +189,4 @@ elsif game_type == 3
     puts "You did not guess correctly within 12 turns. Codemaker wins!"
   end
 end
+
